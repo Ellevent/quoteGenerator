@@ -12,10 +12,41 @@ export default function QuoteGenerator() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchRandomSceneryBackground = async () => {
+    try {
+      const response = await fetch('/api/unsplash');
+      if (!response.ok) {
+        throw new Error('Failed to fetch background image');
+      }
+      const data = await response.json();
+      const imageUrl = data.imageUrl;
+      
+      // Preload the image for smoother transition
+      const img = new Image();
+      img.onload = () => {
+        // Once image is loaded, set it as background
+        document.body.style.backgroundImage = `url(${imageUrl})`;
+      };
+      img.src = imageUrl;
+      
+      // Set background properties
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundAttachment = 'fixed';
+      document.body.style.backgroundRepeat = 'no-repeat';
+    } catch (error) {
+      console.error('Error setting background image:', error);
+    }
+  };
+
   const fetchQuote = async () => {
     try {
       setLoading(true);
       setError(null);
+      
+      // Fetch new background image when generating a new quote
+      await fetchRandomSceneryBackground();
+      
       const response = await fetch('/api/quote');
       
       if (!response.ok) {
