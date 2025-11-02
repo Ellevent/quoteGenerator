@@ -42,15 +42,15 @@ export default function QuoteGenerator() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
-      <div className="bg-white p-8 rounded-lg shadow-sm max-w-2xl w-full text-center border border-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4">
+      <div className="bg-white/25 backdrop-blur-lg p-8 rounded-lg shadow-lg max-w-2xl w-full text-center border border-white/40">
         {loading ? (
           <div className="py-8">
-            <p className="text-gray-500">Loading quote...</p>
+            <p className="text-white">Loading quote...</p>
           </div>
         ) : error ? (
           <div className="py-8">
-            <p className="text-red-500 mb-4">{error}</p>
+            <p className="text-white mb-4">{error}</p>
             <button
               onClick={fetchQuote}
               className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 focus:outline-none transition-colors"
@@ -60,10 +60,10 @@ export default function QuoteGenerator() {
           </div>
         ) : quote ? (
           <>
-            <blockquote className="text-xl md:text-2xl text-gray-800 mb-6 leading-relaxed font-light">
+            <blockquote className="text-xl md:text-2xl text-white mb-6 leading-relaxed font-light">
               &ldquo;{quote.q}&rdquo;
             </blockquote>
-            <p className="text-sm md:text-base text-gray-600 mb-8">
+            <p className="text-sm md:text-base text-white mb-8">
               &mdash; {quote.a}
             </p>
             <button
