@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 export async function GET() {
   try {
     const clientId = process.env.UNSPLASH_ACCESS_KEY;
