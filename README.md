@@ -29,8 +29,45 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Deploy on Cloudflare Pages
+
+This app is configured for deployment on Cloudflare Pages with API routes support via Cloudflare Pages Functions.
+
+### Deployment Steps:
+
+1. **Go to Cloudflare Dashboard:**
+   - Navigate to [Cloudflare Dashboard](https://dash.cloudflare.com) → **Workers & Pages** → **Create application** → **Pages** tab
+
+2. **Connect GitHub Repository:**
+   - Click **Connect to Git**
+   - Authorize Cloudflare to access your GitHub account
+   - Select your `quoteGenerator` repository
+   - Click **Begin setup**
+
+3. **Configure Build Settings:**
+   - **Framework preset:** `Next.js (Static HTML Export)` or `None`
+   - **Build command:** `npm run cf:pages:build`
+   - **Build output directory:** `.vercel/output/static`
+   - **Node.js version:** `20` (or latest available)
+   - **Root directory:** `/` (leave as default)
+
+4. **Environment Variables (Optional):**
+   - If you have an Unsplash API key, add it as an environment variable:
+     - Name: `UNSPLASH_ACCESS_KEY`
+     - Value: Your Unsplash API key
+
+5. **Deploy:**
+   - Click **Save and Deploy**
+   - Cloudflare will build and deploy your app
+   - You'll get a `*.pages.dev` URL for your app
+
+### Note:
+- The build process uses `@cloudflare/next-on-pages` to convert Next.js API routes to Cloudflare Pages Functions
+- Local Windows builds may have issues with `next-on-pages` CLI - this is fine, Cloudflare will build on their servers
+- Future commits to your main branch will automatically trigger new deployments
+
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You can also deploy on [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
